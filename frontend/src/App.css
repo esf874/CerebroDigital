@@ -1,0 +1,586 @@
+
+/* Estilos para Markdown en las notas */
+.markdown-content {
+  font-family: 'Satoshi', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+
+.markdown-content h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.markdown-content h2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-top: 1.2rem;
+  margin-bottom: 0.8rem;
+  color: var(--text-primary);
+}
+
+.markdown-content h3 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-top: 1rem;
+  margin-bottom: 0.6rem;
+  color: var(--text-primary);
+}
+
+.markdown-content p {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+.markdown-content strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.markdown-content em {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.markdown-content ul, .markdown-content ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+.markdown-content li {
+  margin-bottom: 0.3rem;
+}
+
+.markdown-content code {
+  background-color: var(--bg-tertiary);
+  padding: 0.2rem 0.4rem;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+.markdown-content pre {
+  background-color: var(--bg-tertiary);
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+.markdown-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.markdown-content a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--accent);
+}
+
+.markdown-content a:hover {
+  color: var(--accent-hover);
+  border-bottom: 1px solid var(--accent-hover);
+}
+
+.markdown-content blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1rem;
+  margin-left: 0;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.markdown-content hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1rem 0;
+}
+
+.markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.markdown-content th, .markdown-content td {
+  border: 1px solid var(--border);
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.markdown-content th {
+  background-color: var(--bg-tertiary);
+}
+
+
+.hashtag {
+  color: #f472b6;
+  background-color: rgba(244, 114, 182, 0.15);
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 0.85em;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.hashtag:hover {
+  background-color: rgba(244, 114, 182, 0.25);
+  cursor: pointer;
+}
+
+.hashtag-inline {
+  color: #f472b6;
+  background-color: rgba(244, 114, 182, 0.15);
+  padding: 0px 4px;
+  border-radius: 12px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.hashtag-inline:hover {
+  background-color: rgba(244, 114, 182, 0.25);
+  cursor: pointer;
+}
+
+/* Para la vista previa de Markdown */
+.markdown-preview .hashtag-inline {
+  color: #f472b6;
+  background-color: rgba(244, 114, 182, 0.15);
+  padding: 2px 8px;
+  border-radius: 16px;
+  font-size: 0.85em;
+}
+
+
+/* Fuente Satoshi desde Fontshare */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/src/fonts/satoshi/Satoshi-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/src/fonts/satoshi/Satoshi-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/src/fonts/satoshi/Satoshi-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/src/fonts/satoshi/Satoshi-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/src/fonts/satoshi/Satoshi-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --bg-tertiary: #1a1a1a;
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-muted: #888888;
+  --accent: #ffffff;
+  --accent-hover: #e0e0e0;
+  --accent-glow: rgba(255, 255, 255, 0.1);
+  --border: #2a2a2a;
+  --border-light: #333333;
+  --danger: #ef4444;
+  --success: #10b981;
+  --navbar-bg: rgba(10, 10, 10, 0.95);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Satoshi', 'Crimson Pro', 'Georgia', 'Times New Roman', serif;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Contenedor principal - AHORA OCUPA TODO EL ANCHO */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Navbar - ANCHO COMPLETO */
+.navbar {
+  position: sticky;
+  top: 0;
+  background-color: var(--navbar-bg);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  width: 100%;
+  z-index: 100;
+}
+
+.navbar-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  width: 100%;
+  padding: 0 2rem;
+}
+
+/* Logo - TEXTO EN BLANCO */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.logo:hover {
+  opacity: 0.8;
+}
+
+.logo-icon {
+  font-size: 1.6rem;
+  filter: brightness(0) invert(1); /* Convierte el emoji/icono a blanco */
+}
+
+.logo-text {
+  color: var(--text-primary);
+  background: none;
+  -webkit-text-fill-color: var(--text-primary);
+}
+
+/* Navegación - TEXTO EN BLANCO */
+.nav-links {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+/* Pestaña activa - FONDO GRIS */
+.nav-link.active {
+  background-color: #2a2a2a;
+  color: var(--text-primary);
+  box-shadow: none;
+}
+
+/* Contenido principal - ANCHO COMPLETO */
+.main-content {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  width: 100%;
+}
+
+/* Tarjetas y elementos comunes */
+.card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--border-light);
+}
+
+/* Botones */
+.btn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  font-family: 'Satoshi', 'Crimson Pro', 'Georgia', 'Times New Roman', serif;
+}
+
+.btn-primary {
+  background-color: #2a2a2a;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+.btn-primary:hover {
+  background-color: #333333;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background-color: var(--border);
+  color: var(--text-primary);
+}
+
+.btn-danger {
+  background-color: var(--danger);
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #dc2626;
+}
+
+/* Inputs y formularios */
+input, textarea, select {
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-family: 'Satoshi', 'Crimson Pro', 'Georgia', 'Times New Roman', serif;
+  transition: all 0.2s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--border-light);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+/* Grid de notas - RESPONSIVE */
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.note-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.note-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-light);
+  background-color: #151515;
+}
+
+.note-card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.note-card-content {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.note-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  background-color: rgba(244, 114, 182, 0.15); /* Rosa translúcido */
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  color: #f472b6; /* Rosa claro */
+  border: 1px solid rgba(244, 114, 182, 0.3);
+  font-family: 'Satoshi', 'JetBrains Mono', monospace;
+  letter-spacing: 0.3px;
+}
+
+.tag:hover {
+  background-color: rgba(244, 114, 182, 0.25);
+  border-color: rgba(244, 114, 182, 0.5);
+}
+
+/* Iconos y emojis - BLANCOS */
+.icon-white {
+  filter: brightness(0) invert(1);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-enter {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* Header de página */
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+/* Estado vacío */
+.empty-state {
+  text-align: center;
+  padding: 4rem;
+  color: var(--text-muted);
+}
+
+.empty-state-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  filter: brightness(0) invert(1);
+  opacity: 0.5;
+}
+
+.empty-state-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.empty-state-text {
+  font-size: 0.9rem;
+}
+
+
+/* Iconos en blanco */
+.logo-icon, .nav-link svg, .page-icon, .empty-state-icon {
+  color: var(--text-primary);
+  stroke: currentColor;
+}
+
+/* Para SVG inline */
+.logo-icon {
+  stroke: white;
+}
+
+/* Ajuste de iconos en botones */
+.btn svg {
+  stroke: currentColor;
+}
+
+/* Icono de página */
+.page-icon {
+  margin-bottom: 1rem;
+}
+
+
+/* frontend/src/App.css - Añadir */
+
+/* Enlaces internos [[nota]] */
+.internal-link {
+  color: #60f0c0 !important;
+  background-color: rgba(96, 240, 192, 0.1);
+  padding: 0px 4px;
+  border-radius: 6px;
+  text-decoration: none !important;
+  border-bottom: 1px solid #60f0c0 !important;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.internal-link:hover {
+  background-color: rgba(96, 240, 192, 0.2);
+  color: #a0f0d0 !important;
+  border-bottom-color: #a0f0d0 !important;
+}
+
+/* Hashtags inline */
+.hashtag-inline {
+  color: #f472b6;
+  background-color: rgba(244, 114, 182, 0.15);
+  padding: 2px 8px;
+  border-radius: 16px;
+  font-size: 0.85em;
+  display: inline-block;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hashtag-inline:hover {
+  background-color: rgba(244, 114, 182, 0.25);
+}

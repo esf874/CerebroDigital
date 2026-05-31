@@ -1,0 +1,57 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7
+    container_name: cerebro-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=db
+    restart: unless-stopped
+    networks:
+      - cerebro-network
+      
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: cerebro-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017
+      - NAME_DATABASE=db
+      - APP_PORT=8080
+      - LLM_URL=http://host.docker.internal:8081
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - cerebro-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: cerebro-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - cerebro-network
+
+volumes:
+  mongodb_data:
+
+
+networks:
+   cerebro-network:
+    driver: bridge

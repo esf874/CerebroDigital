@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "jnoortheen.nix-ide",
+        "golang.go",
+        "mongodb.mongodb-vscode",
+        "mkhl.direnv"
+    ]
+}

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { useState } from 'react'
 
 // Componente de editor de texto con vista previa y detección de etiquetas.
@@ -11,6 +12,32 @@ function MarkdownEditor({ value, onChange, placeholder, rows = 10, onHashtagDete
       if (m === '<') return '&lt;'
       if (m === '>') return '&gt;'
       return m
+    })
+  }
+
+  const renderFormattedText = (text) => {
+    if (!text) return '*Sin contenido*'
+
+    const escaped = text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+
+    const parts = escaped.split(/(\n|#\w+(?=\s|$))/g)
+
+    return parts.map((part, i) => {
+      if (part === '\n') return <br key={i} />
+
+      if (part.startsWith('#')) {
+        const tag = part.slice(1)
+        return (
+          <span key={i} className="hashtag-inline" data-tag={tag}>
+            #{tag}
+          </span>
+        )
+      }
+
+      return part
     })
   }
 
@@ -36,20 +63,7 @@ function MarkdownEditor({ value, onChange, placeholder, rows = 10, onHashtagDete
     }
   }
 
-  // Convertir hashtags a spans (solo visual)
-  const convertHashtags = (text) => {
-    if (!text) return '*Sin contenido*'
 
-    let escaped = escapeHtml(text)
-
-    escaped = escaped.replace(/#(\w+)(?=\s|$)/g, (match, tag) => {
-      return `<span class="hashtag-inline" data-tag="${tag}">#${tag}</span>`
-    })
-
-    escaped = escaped.replace(/\n/g, '<br>')
-
-    return escaped
-  }
 
   return (
     <div style={{
@@ -126,15 +140,21 @@ function MarkdownEditor({ value, onChange, placeholder, rows = 10, onHashtagDete
             lineHeight: '1.6'
           }}
         >
-          <div
-            dangerouslySetInnerHTML={{
-              __html: convertHashtags(value || '*Sin contenido*')
-            }}
-          />
+          <div>
+            {renderFormattedText(value)}
+          </div>
         </div>
       )}
     </div>
   )
+}
+
+MarkdownEditor.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+  rows: PropTypes.number,
+  onHashtagDetected: PropTypes.func.isRequired
 }
 
 export default MarkdownEditor

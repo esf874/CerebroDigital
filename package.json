@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "prop-types": "^15.8.1",
     "react-markdown": "^10.1.0",
     "react-router-dom": "^7.14.0",
     "reactflow": "^11.11.4",

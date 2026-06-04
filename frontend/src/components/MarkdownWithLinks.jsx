@@ -7,16 +7,19 @@ function MarkdownWithLinks({ content, onNavigateToNote }) {
   const processLinks = (text) => {
     if (!text) return ''
 
-    let processed = text.replace(/\[\[(.*?)\]\]/g, (match, title) => {
+    let processed = text.replace(/\[\[([^\[\]]+)\]\]/g, (match, title) => {
       // Resolver el título a un ID de nota real
       return `[${title}](/note/search?title=${encodeURIComponent(title)})`
     })
 
-    processed = processed.replace(/\[([^\]]+)\]\((?!(http|https|\/))([^)]+)\)/g, (match, label, id) => {
+    processed = processed.replace( /\[([^\]]+)\]\((?!https?:\/\/|\/)([^)]+)\)/g, (match, label, id) => {
       return `[${label}](/note/${id})`
     })
 
-    return processed
+    return (
+    <div>
+      {processedContent}
+    </div>)
   }
 
   const handleLinkClick = async (href, event) => {

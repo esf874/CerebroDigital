@@ -4,22 +4,25 @@ import { api } from '../services/api'
 
 // Componente para renderizar Markdown con enlaces internos a notas.
 function MarkdownWithLinks({ content, onNavigateToNote }) {
+
   const processLinks = (text) => {
     if (!text) return ''
 
-    let processed = text.replace(/\[\[([^\[\]]+)\]\]/g, (match, title) => {
-      // Resolver el título a un ID de nota real
-      return `[${title}](/note/search?title=${encodeURIComponent(title)})`
-    })
+    let processed = text.replace(
+      /\[\[([^\[\]]+)\]\]/g,
+      (match, title) => {
+        return `[${title}](/note/search?title=${encodeURIComponent(title)})`
+      }
+    )
 
-    processed = processed.replace( /\[([^\]]+)\]\((?!https?:\/\/|\/)([^)]+)\)/g, (match, label, id) => {
-      return `[${label}](/note/${id})`
-    })
+    processed = processed.replace(
+      /\[([^\]]+)\]\((?!https?:\/\/|\/)([^)]+)\)/g,
+      (match, label, id) => {
+        return `[${label}](/note/${id})`
+      }
+    )
 
-    return (
-    <div>
-      {processedContent}
-    </div>)
+    return processed
   }
 
   const handleLinkClick = async (href, event) => {
@@ -27,18 +30,19 @@ function MarkdownWithLinks({ content, onNavigateToNote }) {
     event.stopPropagation()
 
     if (href.includes('?title=')) {
-      const titleToFind = decodeURIComponent(href.split('?title=')[1]);
+      const titleToFind = decodeURIComponent(href.split('?title=')[1])
 
       try {
-        const targetNote = await api.getNoteByTitle(titleToFind);
+        const targetNote = await api.getNoteByTitle(titleToFind)
 
-        if (targetNote && targetNote.id) {
-          onNavigateToNote(targetNote.id);
+        if (targetNote?.id) {
+          onNavigateToNote(targetNote.id)
         }
       } catch (error) {
-        console.error("Error resolviendo título:", titleToFind, error);
-        alert("No se encontró una nota con el título: " + titleToFind);
+        console.error("Error resolviendo título:", titleToFind, error)
+        alert("No se encontró una nota con el título: " + titleToFind)
       }
+
     } else if (href.startsWith('/note/')) {
       const noteId = href.replace('/note/', '')
       onNavigateToNote(noteId)
@@ -60,8 +64,13 @@ function MarkdownWithLinks({ content, onNavigateToNote }) {
               borderBottom: '1px solid rgba(167, 139, 250, 0.3)',
               transition: 'all 0.2s ease'
             }}
-            onMouseOver={(e) => e.target.style.borderBottom = '1px solid #a78bfa'}
-            onMouseOut={(e) => e.target.style.borderBottom = '1px solid rgba(167, 139, 250, 0.3)'}
+            onMouseOver={(e) =>
+              (e.target.style.borderBottom = '1px solid #a78bfa')
+            }
+            onMouseOut={(e) =>
+            (e.target.style.borderBottom =
+              '1px solid rgba(167, 139, 250, 0.3)')
+            }
             {...props}
           >
             {children}
@@ -74,4 +83,4 @@ function MarkdownWithLinks({ content, onNavigateToNote }) {
   )
 }
 
-export default MarkdownWithLinks 
+export default MarkdownWithLinks

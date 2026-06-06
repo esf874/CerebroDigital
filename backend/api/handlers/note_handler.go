@@ -11,6 +11,13 @@ import (
 	"gitlab.com/HP-SCDS/Observatorio/2025-2026/cerebrodigital/usal-za-cerebrodigital/backend/internal/domain"
 )
 
+const (
+	contextType      = "Content-Type"
+	mimeTypeJSON     = "application/json"
+	notaNoEncontrada = "Nota no encontrada"
+	idRequerido      = "ID requerido"
+)
+
 // CreateNoteRequest es el formato para crear una nota.
 type CreateNoteRequest struct {
 	Title    string   `json:"title"`
@@ -64,7 +71,7 @@ func (h *NoteHandler) GetAllNotes(w http.ResponseWriter, r *http.Request) {
 		response[i] = toNoteResponse(note)
 	}
 
-	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set(contextType, mimeTypeJSON)
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -75,21 +82,21 @@ func (h *NoteHandler) GetNote(w http.ResponseWriter, r *http.Request) {
 	id := vars["id"]
 
 	if id == "" {
-		respondWithError(w, http.StatusBadRequest, "ID requerido")
+		respondWithError(w, http.StatusBadRequest, idRequerido)
 		return
 	}
 
 	note, err := h.noteService.GetNote(r.Context(), id)
 	if err != nil {
 		if err == domain.ErrNoteNotFound {
-			respondWithError(w, http.StatusNotFound, "Nota no encontrada")
+			respondWithError(w, http.StatusNotFound, notaNoEncontrada)
 			return
 		}
 		respondWithError(w, http.StatusInternalServerError, "Error interno")
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set(contextType, mimeTypeJSON)
 	json.NewEncoder(w).Encode(toNoteResponse(note))
 }
 
@@ -102,12 +109,12 @@ func (h *NoteHandler) GetNoteByTitle(w http.ResponseWriter, r *http.Request) {
 	notes, _ := h.noteService.GetAllNotes(r.Context())
 	for _, n := range notes {
 		if strings.EqualFold(n.Title, title) {
-			w.Header().Set("Content-Type", "application/json")
+			w.Header().Set(contextType, mimeTypeJSON)
 			json.NewEncoder(w).Encode(toNoteResponse(n))
 			return
 		}
 	}
-	respondWithError(w, http.StatusNotFound, "Nota no encontrada")
+	respondWithError(w, http.StatusNotFound, notaNoEncontrada)
 }
 
 // POST /api/notes
@@ -154,7 +161,7 @@ func (h *NoteHandler) CreateNote(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set(contextType, mimeTypeJSON)
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(toNoteResponse(note))
 }
@@ -164,7 +171,7 @@ func (h *NoteHandler) UpdateNote(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
 	if id == "" {
-		respondWithError(w, http.StatusBadRequest, "ID requerido")
+		respondWithError(w, http.StatusBadRequest, idRequerido)
 		return
 	}
 
@@ -193,7 +200,7 @@ func (h *NoteHandler) UpdateNote(w http.ResponseWriter, r *http.Request) {
 
 	if err := h.noteService.UpdateNote(r.Context(), id, update); err != nil {
 		if err == domain.ErrNoteNotFound {
-			respondWithError(w, http.StatusNotFound, "Nota no encontrada")
+			respondWithError(w, http.StatusNotFound, notaNoEncontrada)
 			return
 		}
 		respondWithError(w, http.StatusInternalServerError, "Error al actualizar")
@@ -201,7 +208,7 @@ func (h *NoteHandler) UpdateNote(w http.ResponseWriter, r *http.Request) {
 	}
 
 	updatedNote, _ := h.noteService.GetNote(r.Context(), id)
-	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set(contextType, mimeTypeJSON)
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(toNoteResponse(updatedNote))
 }
@@ -211,13 +218,13 @@ func (h *NoteHandler) DeleteNote(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
 	if id == "" {
-		respondWithError(w, http.StatusBadRequest, "ID requerido")
+		respondWithError(w, http.StatusBadRequest, idRequerido)
 		return
 	}
 
 	if err := h.noteService.DeleteNote(r.Context(), id); err != nil {
 		if err == domain.ErrNoteNotFound {
-			respondWithError(w, http.StatusNotFound, "Nota no encontrada")
+			respondWithError(w, http.StatusNotFound, notaNoEncontrada)
 			return
 		}
 		respondWithError(w, http.StatusInternalServerError, "Error al eliminar")
@@ -279,7 +286,7 @@ func (h *NoteHandler) RemoveTag(w http.ResponseWriter, r *http.Request) {
 
 	if err := h.noteService.RemoveTagFromNote(r.Context(), noteID, tag); err != nil {
 		if err == domain.ErrNoteNotFound {
-			respondWithError(w, http.StatusNotFound, "Nota no encontrada")
+			respondWithError(w, http.StatusNotFound, notaNoEncontrada)
 			return
 		}
 		if err == domain.ErrTagNotFound {
@@ -295,7 +302,7 @@ func (h *NoteHandler) RemoveTag(w http.ResponseWriter, r *http.Request) {
 
 // Error en formato JSON
 func respondWithError(w http.ResponseWriter, code int, message string) {
-	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set(contextType, mimeTypeJSON)
 	w.WriteHeader(code)
 	json.NewEncoder(w).Encode(map[string]string{"error": message})
 }

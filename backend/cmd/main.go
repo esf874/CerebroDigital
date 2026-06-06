@@ -19,6 +19,10 @@ import (
 	"github.com/gorilla/mux"
 )
 
+const (
+	urlNote = "/api/notes/{id}"
+)
+
 func main() {
 
 	// Carga variables de entorno del .env
@@ -113,9 +117,9 @@ func main() {
 
 	// Rutas con parámetros
 	router.HandleFunc("/api/notes/lookup", noteHandler.GetNoteByTitle).Queries("title", "{title}").Methods("GET")
-	router.HandleFunc("/api/notes/{id}", noteHandler.GetNote).Methods("GET")
-	router.HandleFunc("/api/notes/{id}", noteHandler.UpdateNote).Methods("PUT")
-	router.HandleFunc("/api/notes/{id}", noteHandler.DeleteNote).Methods("DELETE")
+	router.HandleFunc(urlNote, noteHandler.GetNote).Methods("GET")
+	router.HandleFunc(urlNote, noteHandler.UpdateNote).Methods("PUT")
+	router.HandleFunc(urlNote, noteHandler.DeleteNote).Methods("DELETE")
 
 	router.HandleFunc("/api/notes/{id}/graph", graphHandler.GetGraph).Methods("GET")
 

@@ -70,6 +70,13 @@ function MarkdownWithLinks({ content, onNavigateToNote }) {
             (e.target.style.borderBottom =
               '1px solid rgba(167, 139, 250, 0.3)')
             }
+            onFocus={(e) =>
+              (e.target.style.borderBottom = '1px solid #a78bfa')
+            }
+            onBlur={(e) =>
+            (e.target.style.borderBottom =
+              '1px solid rgba(167, 139, 250, 0.3)')
+            }
             {...props}
           >
             {children}

@@ -109,14 +109,13 @@ La aplicación incorpora además un asistente de inteligencia artificial capaz d
    cd CerebroDigital
    
 2. **Iniciar la aplicación**
+     ```bash
     docker compose up --build
 
 3. **Acceder a los servicios**
-    Una vez desplegado:
     
-        Frontend: http://localhost:8080 
-        Backend: http://localhost:8080 
-        MongoDB: localhost:27017
+    Una vez desplegado: acceder mediante el siguiente [enlace](http://localhost/)
+
 
 ## Configuración del modelo IA
 El sistema utiliza inferencia local mediante **llama.cpp** y el modelo **Qwen3-4B-Thinking**.

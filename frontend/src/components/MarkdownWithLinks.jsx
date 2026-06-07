@@ -15,9 +15,18 @@ function MarkdownWithLinks({ content, onNavigateToNote }) {
       }
     )
 
-    processed = processed.replace(/\[([^\]]+)\]\((?!https?:\/\/|\/)([^\s)]+)\)/g,
-      (match, label, id) => {
-        return `[${label}](/note/${id})`
+    processed = processed.replace(
+      /\[([^\]]{1,100})\]\(([^)]{1,100})\)/g,
+      (match, label, target) => {
+        if (
+          target.startsWith('http://') ||
+          target.startsWith('https://') ||
+          target.startsWith('/')
+        ) {
+          return match
+        }
+
+        return `[${label}](/note/${target})`
       }
     )
 

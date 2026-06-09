@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="CerebroDigitalLogo.png" alt="Cerebro Digital Logo" width="400"/>
+  <img src="docs/CerebroDigitalLogo.png" alt="Cerebro Digital Logo" width="400"/>
   <p><em>Plataforma de gestión de notas basada en grafos e IA local</em></p>
 </div>
 
@@ -52,7 +52,7 @@ La aplicación incorpora además un asistente de inteligencia artificial capaz d
 
 ### Diagrama de arquitectura
 
-<img src="DiagramaArquitectura.png" alt="Diagrama de Arquitectura" width="700" />
+<img src="docs/DiagramaArquitectura.png" alt="Diagrama de Arquitectura" width="700" />
 
 ## Tecnologías utilizadas
 
@@ -81,19 +81,19 @@ La aplicación incorpora además un asistente de inteligencia artificial capaz d
 
 ### Vista principal
 
-<img src="PantallaPrincipal.png" alt="Vista principal" width="600" />
+<img src="docs/PantallaPrincipal.png" alt="Vista principal" width="600" />
 
 ### Vista detallada de una nota
 
-<img src="VistaDetallada.png" alt="Vista detallada de una nota" width="600" />
+<img src="docs/VistaDetallada.png" alt="Vista detallada de una nota" width="600" />
 
 ### Visualización del grafo
 
-<img src="Subgrafo.png" alt="Subgrafo de una nota concreta" width="600" />
+<img src="docs/Subgrafo.png" alt="Subgrafo de una nota concreta" width="600" />
 
 ### Asistente conversacional
 
-<img src="AsistenteGlobal.png" alt="Asistente global" width="600" />
+<img src="docs/AsistenteGlobal.png" alt="Asistente global" width="600" />
 
 
 ## Instalación 
@@ -140,7 +140,7 @@ El análisis final del proyecto supera satisfactoriamente el Quality Gate establ
 | ⚠️ **Vulnerabilities** | **0** |
 | 📝 **Duplicated Code** | **2.2%** |
 
-<img src="ResumenSonar.png" alt="Resumen Análisis SonarCloud" width="500" />
+<img src="docs/ResumenSonar.png" alt="Resumen Análisis SonarCloud" width="500" />
 
 ## Autor
 **Estela Simón Fernández**
